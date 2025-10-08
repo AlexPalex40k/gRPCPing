@@ -1,0 +1,64 @@
+# Build outputs
+[Bb]in/
+[Oo]bj/
+Debug/
+Release/
+x64/
+x86/
+app.publish/
+publish/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.slnLaunch.user
+*.vssscc
+*.vspscc
+
+# Rider / ReSharper / JetBrains
+.idea/
+*.sln.iml
+_ReSharper*/
+*.ReSharper*/
+*.DotSettings.user
+.fleet/
+
+# Test results
+TestResults/
+TestResult*/
+*.trx
+*.coverage
+*.coveragexml
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+!packages/build/
+!packages/repositories.config
+*.nuget.props
+*.nuget.targets
+
+# Logs and temp
+*.log
+*.tmp
+*.temp
+
+# OS-specific
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# WPF/Generated intermediates (safe to ignore)
+*.g.cs
+*.g.i.cs
+*.baml
+*.iobj
+*.ipdb
+*.ilk
+*.obj
+*.pch
+*.pdb
