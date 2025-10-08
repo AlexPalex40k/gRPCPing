@@ -1,0 +1,115 @@
+﻿<Window
+    x:Class="GrpcPingWpf.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:helpers="clr-namespace:GrpcPingWpf.Helpers"
+    Title="gRPC Ping"
+    Width="400"
+    Height="400"
+    WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <helpers:BooleanNegationConverter x:Key="NotBool" />
+    </Window.Resources>
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock
+            VerticalAlignment="Center"
+            Text="Address:" />
+        <TextBox
+            Grid.Row="0"
+            Grid.Column="1"
+            Width="180"
+            Margin="8,0,0,0"
+            Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            VerticalAlignment="Center"
+            Text="Port:" />
+        <TextBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Width="180"
+            Margin="8,0,0,0"
+            Text="{Binding Port, UpdateSourceTrigger=PropertyChanged}" />
+
+        <CheckBox
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Content="Use TLS (https)"
+            IsChecked="{Binding UseTls}" />
+
+        <StackPanel
+            Grid.Row="3"
+            Grid.Column="0"
+            Grid.ColumnSpan="2"
+            Margin="0,12,0,0"
+            Orientation="Vertical">
+            <TextBlock
+                FontWeight="Bold"
+                Text="Status:" />
+            <TextBlock
+                Margin="0,4,0,0"
+                Foreground="{Binding StatusBrush}"
+                Text="{Binding StatusText}"
+                TextWrapping="Wrap" />
+
+            <TextBlock
+                Margin="0,6,0,0"
+                Foreground="DarkRed"
+                Text="{Binding LastError}"
+                TextWrapping="Wrap"
+                Visibility="{Binding HasError, Converter={StaticResource BoolToVis}}" />
+        </StackPanel>
+
+        <Grid
+            Grid.Row="4"
+            Grid.Column="0"
+            Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+                <Button
+                    MinWidth="100"
+                    Height="32"
+                    Margin="0,0,8,0"
+                    Click="OnToggleTestServerClick"
+                    Content="{Binding StartServerButtonText}"
+                    IsEnabled="{Binding IsServerBusy, Converter={StaticResource NotBool}}" />
+                <TextBlock
+                    VerticalAlignment="Center"
+                    Text="{Binding TestServerStatusText}" />
+            </StackPanel>
+
+            <Button
+                Grid.Column="1"
+                Width="160"
+                Height="32"
+                HorizontalAlignment="Right"
+                Click="OnConnectClick"
+                Content="{Binding ConnectButtonText}"
+                IsEnabled="{Binding IsBusy, Converter={StaticResource NotBool}}" />
+        </Grid>
+    </Grid>
+</Window>
